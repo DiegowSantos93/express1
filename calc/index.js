@@ -27,4 +27,4 @@ app.get('/calculadora/multiplicacao',(req, res) => {
 
 app.listen(porta, () => {
     console.log(`Bora lá, porta ${porta}`);
-  })
+})
