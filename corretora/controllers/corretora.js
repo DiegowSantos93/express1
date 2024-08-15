@@ -32,6 +32,8 @@ const criar = (body) => {
     if (novo){
         db.push(novo);
         return {status: 201, message:'Registro criado com sucesso.'}
+    } else {
+        return {status: 409, message:'Verificar os dados.'}
     }
 };
 
@@ -47,7 +49,7 @@ const listar = () => {
 
 const atualizar = (body) => {
     if (listar()){
-        const id = parseInt(body, id)
+        const id = parseInt(body.id)
 
         const indice = getIndice(id)
 
@@ -56,19 +58,25 @@ const atualizar = (body) => {
             
             if (novo) {
                 db[indice] = novo;
-                console.log('Atualizado com sucesso.')
+                return {status: 201, message:'Registro atualizado com sucesso.'}
             }
+        } else {
+            return {status: 404, message: 'ID não encontrado.'}
         }
     }
 };
 
 const remover = (body) => {
     if (listar()){
-    const indice = getIndice(id);
+        const id = parseInt(body.id)
+
+        const indice = getIndice(id);
 
         if (indice > -1){
             db.splice(indice,1)
-            console.log('Removido com sucesso.')
+            return {status: 201, message:'Registro removido com sucesso.'}
+        } else {
+            return {status: 409, message:'Não removido, verificar dados.'}
         }
     }
 };

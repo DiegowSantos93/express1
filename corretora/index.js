@@ -10,10 +10,21 @@ app.get('/corretora', (req, res) => {
 })
 
 app.post('/corretora', (req, res) => {
-const result = corretora.criar(req.body);
-res.status(result.status).json({ message: result.message})
+    const result = corretora.criar(req.body);
+    res.status(result.status).json({ message: result.message})
 })
 
+app.put('/corretora/:id', (req, res) => {
+    const id = parseInt(req.params.id); // Captura o ID da URL
+    const result = corretora.atualizar({ id, ...req.body }); // Passa o ID e os novos dados
+    res.status(result.status).json({ message: result.message})
+});
+
+app.delete('/corretora/:id', (req, res) => {
+    const id = parseInt(req.params.id); // Captura o ID da URL
+    const result = corretora.remover({id});
+    res.status(result.status).json({ message: result.message})
+});
 
 app.listen(porta, () => {
     console.log(`Bora lá, porta ${porta}`);
