@@ -10,9 +10,8 @@ app.get('/corretora', (req, res) => {
 })
 
 app.post('/corretora', (req, res) => {
-
-const result = corretora.store(req.body);
-res.result(result.status).json({ message: result.message})
+const result = corretora.criar(req.body);
+res.status(result.status).json({ message: result.message})
 })
 
 

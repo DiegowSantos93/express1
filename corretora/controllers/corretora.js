@@ -9,6 +9,7 @@ function getIndice(id){
             return indice
         } else {
             console.log('Id inválido.')
+            return -1;
         }
 };
 
@@ -18,7 +19,7 @@ const modelo = (body, id = ++ultimoId) => {
         return {
             id,
             nome: body.nome
-        }
+        };
     }
 
     console.log('Dados inválidos.')
@@ -44,14 +45,14 @@ const listar = () => {
     return true;
 };
 
-const atualizar = () => {
+const atualizar = (body) => {
     if (listar()){
-        const id = parseInt(prompt('Digite o id que deseja atualizar: '))
+        const id = parseInt(body, id)
 
         const indice = getIndice(id)
 
         if (indice > -1){
-            const novo = modelo(id)
+            const novo = modelo(body, id)
             
             if (novo) {
                 db[indice] = novo;
@@ -61,12 +62,9 @@ const atualizar = () => {
     }
 };
 
-const remover = () => {
+const remover = (body) => {
     if (listar()){
-
-        const id = parseInt(prompt('Digite o id que deseja atualizar: '))
-
-        const indice = getIndice(id);
+    const indice = getIndice(id);
 
         if (indice > -1){
             db.splice(indice,1)
@@ -77,4 +75,4 @@ const remover = () => {
 
 const showAll = () => db;
 
-module.exports = {criar, listar, atualizar, remover, mostrar, showAll}
+module.exports = {criar, listar, atualizar, remover, showAll}
