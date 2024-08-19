@@ -15,13 +15,13 @@ app.post('/corretora', (req, res) => {
 });
 
 app.put('/corretora/:id', (req, res) => {
-    const id = parseInt(req.params.id); // Captura o ID da URL
-    const result = corretora.atualizar({ id, ...req.body }); // Passa o ID e os novos dados
+    const id = parseInt(req.params.id);
+    const result = corretora.atualizar({ id, ...req.body });
     res.status(result.status).json({ message: result.message})
 });
 
 app.delete('/corretora/:id', (req, res) => {
-    const id = parseInt(req.params.id); // Captura o ID da URL
+    const id = parseInt(req.params.id);
     const result = corretora.remover({id});
     res.status(result.status).json({ message: result.message})
 });
